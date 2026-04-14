@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Art of Living — Epictetus Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --stone: #4a4540;
+    --dust: #8a8278;
+    --cream: #f7f3ee;
+    --parchment: #efe9e0;
+    --gold: #b5924a;
+    --gold-light: #d4b07a;
+    --rule: #d9d0c4;
+    --section-bg: #f2ece4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── BACK NAV ── */
+  .back-nav {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 48px;
+  }
+  .back-nav a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dust);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .back-nav a:hover { color: var(--gold); }
+  .back-nav a::before { content: '←'; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(181,146,74,0.15);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 1px solid rgba(181,146,74,0.1);
+  }
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 28px;
+  }
+  .header-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(247,243,238,0.55);
+    max-width: 480px;
+    line-height: 1.6;
+    border-top: 1px solid rgba(181,146,74,0.2);
+    padding-top: 20px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 48px;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .toc-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--dust);
+  }
+  .toc a {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--stone);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toc a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  .section-header {
+    padding: 52px 0 28px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+  .section-number {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .section-intro {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--stone);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  /* ── TEACHINGS ── */
+  .teaching {
+    margin-bottom: 44px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .teaching:last-child { border-bottom: none; }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  p {
+    color: var(--stone);
+    margin-bottom: 12px;
+    font-size: 14.5px;
+  }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 500; }
+
+  .pullout {
+    margin: 20px 0;
+    padding: 18px 24px;
+    border-left: 3px solid var(--gold);
+    background: var(--section-bg);
+    border-radius: 0 4px 4px 0;
+  }
+  .pullout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── PILLARS ── */
+  .pillars-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .pillar-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--parchment);
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+  }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 32px;
+    padding-top: 2px;
+  }
+  .pillar-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .pillar-content p {
+    font-size: 13.5px;
+    color: var(--stone);
+    margin: 0;
+  }
+
+  /* ── APPLICATION ── */
+  .scenario {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .scenario:last-child { border-bottom: none; }
+
+  .scenario-trigger {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(181,146,74,0.08);
+    border: 1px solid rgba(181,146,74,0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .scenario h3 { font-size: 20px; margin-bottom: 10px; }
+
+  .action-step {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: var(--section-bg);
+    border-radius: 6px;
+    font-size: 13.5px;
+    color: var(--stone);
+    border-left: 2px solid var(--gold);
+  }
+  .action-step strong {
+    color: var(--ink);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 8px 0 0;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 8px;
+    opacity: 0.5;
+  }
+
+  footer {
+    background: var(--ink);
+    color: rgba(247,243,238,0.4);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  footer span { color: var(--gold-light); }
+  footer a {
+    color: var(--gold-light);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  footer a:hover { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .back-nav { padding: 12px 20px; }
+    header { padding: 40px 24px 36px; }
+    .toc { padding: 16px 24px; gap: 20px; }
+    main { padding: 0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html">Stoic Book Library</a>
+</div>
+
+<header>
+  <p class="eyebrow">Study Guide &amp; Synthesis · Philosophy / Stoicism</p>
+  <h1>The Art of Living</h1>
+  <p class="subtitle">Epictetus — A New Interpretation by Sharon Lebell</p>
+  <p class="header-desc">A complete reference for internalizing Stoic philosophy. Read the key teachings in depth, carry the core pillars in mind, and follow the daily practices to close the gap between understanding and living.</p>
+</header>
+
+<nav class="toc">
+  <span class="toc-label">Contents</span>
+  <a href="#teachings">I. Key Teachings</a>
+  <a href="#pillars">II. Core Pillars</a>
+  <a href="#application">III. Daily Application</a>
+</nav>
+
+<main>
+
+  <!-- ═══════════════════════════════
+       SECTION 1
+  ════════════════════════════════ -->
+  <section id="teachings">
+    <div class="section-header">
+      <span class="section-number">Section I</span>
+      <h2>Comprehensive Key Teachings</h2>
+      <p class="section-intro">Every major concept from the text, with the underlying logic intact — not just what Epictetus taught, but why each idea holds together.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Fundamental Divide: Control and Non-Control</h3>
+      <p>The entire Stoic project rests on one distinction. <strong>Within our control: our opinions, desires, aversions, and chosen responses.</strong> Outside it: our body, reputation, wealth, others' opinions, and the circumstances life delivers. Most human suffering comes from expending effort on the wrong category — trying to control outcomes and people, then suffering when they resist. Redirect that energy inward, toward how you think and respond, and you operate in the one domain where nothing can thwart you.</p>
+      <p>This is not a counsel of passivity. It is a precision instrument for directing energy. When we try to control what is outside us, we inevitably fail, and that failure breeds anxiety, frustration, and resentment. When we redirect that same effort inward — toward how we think, what we value, how we choose to respond — we operate in a domain where no one can thwart us.</p>
+      <div class="pullout"><p>Freedom is not the ability to do whatever you please. It comes from understanding the limits of your own power, and then working wholly within them.</p></div>
+      <p>Epictetus asks us to practice making this distinction constantly, in every situation. Not as a thought experiment, but as a real-time habit of perception.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Events Are Neutral — Interpretation Is Everything</h3>
+      <p>Nothing that happens to you has inherent meaning. A job loss, a harsh word, a death — these are events. What makes them painful or tolerable is the interpretation we layer on top. <strong>It is not things that disturb us, but our judgment about things.</strong> This is not denial or emotional suppression. It is the recognition that the same event can devastate one person and leave another composed, and that the difference lies entirely in how each person has trained their mind to respond.</p>
+      <p>This principle has a practical corollary: before reacting to anything, pause and ask whether your interpretation is accurate. Are you telling yourself a story that is making the situation worse than it actually is? Epictetus calls this "seeing things for what they are" — stripping away the emotional overlay and meeting reality on its own terms.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Desire and Aversion Are Habits That Can Be Retrained</h3>
+      <p>Our desires and aversions are not fixed. They are habits formed through repetition — and like all habits, they can be changed through deliberate practice. <strong>When we habitually desire things outside our control (wealth, approval, outcomes), we are enrolling ourselves in a program of guaranteed disappointment.</strong> When we habitually avoid things we cannot prevent (illness, loss, death), we live in chronic dread.</p>
+      <p>The corrective is to redirect desire toward what is genuinely within reach: acting with integrity, thinking clearly, responding with patience. And to practice accepting — rather than fleeing — the inevitable realities of life. This is not resignation; it is the only path to a desire that can actually be satisfied.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Blame Is Always Misplaced</h3>
+      <p>When things go wrong, the untrained impulse is to find an external cause — another person, bad luck, unfair circumstances. Epictetus sees this as a category error. <strong>Since our suffering is always a product of our own interpretation and response, the source of our suffering is always within us.</strong> This is not self-flagellation. It is the recognition that blaming others or circumstances is useless because it focuses energy on something we cannot change.</p>
+      <p>The mature response is to ask: "What in my own thinking or attitude contributed to this?" Not to wallow in guilt, but to locate the lever — the one thing you actually have power to adjust. This is why Epictetus says that the gradual extinguishing of blame is one of the clearest signs of moral progress.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Your Duties Are Revealed by Your Relationships</h3>
+      <p>We are not isolated individuals. We exist inside webs of relationship — as children, parents, neighbors, citizens, colleagues. <strong>Each of these roles carries natural obligations that are not contingent on whether the other person fulfills their own role well.</strong> Your father may be difficult or foolish, but your duty as a son or daughter remains. Your sibling may treat you poorly, but your obligation to maintain the bond persists.</p>
+      <p>This is one of Epictetus's most demanding teachings because it asks us to separate our performance of duty from our judgment of the other party. We fulfill our role not to earn something back, but because the role itself — and our integrity in living it out — is what matters. Duty, properly understood, is not burden; it is the texture of a life that participates fully in the human community.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Virtue and Happiness Are the Same Thing</h3>
+      <p>For Epictetus, virtue is not a means to happiness — it is happiness. The good life and the virtuous life are synonymous. <strong>Inner coherence, freedom from anxiety, the ability to move through life without dread or compulsive craving — these are the natural results of living in alignment with your highest principles.</strong> There is no gap between doing right and feeling well.</p>
+      <p>This stands in sharp contrast to how our culture understands happiness — as a pleasurable emotional state produced by external circumstances. Epictetus insists that any happiness dependent on circumstances is fragile by nature, because circumstances change. Only the happiness that flows from your own character is stable and portable across all conditions.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Pursuit of Approval Is a Trap</h3>
+      <p>Seeking validation from others is one of the most corrosive patterns Epictetus identifies. When your sense of worth depends on other people's opinions, you have effectively handed control of your inner life to forces you cannot manage. <strong>Personal merit cannot be derived from external sources.</strong> Not from praise, not from association with impressive people, not from titles or possessions. It can only be created through your own actions, choices, and character.</p>
+      <p>This extends to reputation: worrying about how others see you is not only futile but actively damaging, because it diverts attention from the internal work that actually matters. Let your deeds speak. Those who truly understand this principle find that the energy previously spent on impression management becomes available for something genuinely worthwhile.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Philosophical Progress Is Made Through Death and Calamity</h3>
+      <p>Epictetus does not ask us to avoid thinking about loss, death, and pain. He asks us to look at them squarely and often. <strong>By regularly contemplating the impermanence of everything we cherish — people, possessions, health, life itself — we free ourselves from the shock and devastation that comes when these things inevitably change or disappear.</strong> This is not morbidity. It is preparation.</p>
+      <p>The exercise of holding your loved ones with the awareness that they are mortal, of remembering that your circumstances may change at any moment, trains you to appreciate what you have without clinging to it. Clinging to what must pass is the source of grief. Cherishing it while it is here — with clear eyes — is the source of genuine gratitude.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Wisdom Lives in Action, Not in Words or Study</h3>
+      <p>Epictetus is suspicious of the person who reads and discusses philosophy without living it. The purpose of learning Stoic principles is not to become intellectually sophisticated — it is to change how you behave. <strong>The person who truly understands a teaching is the one whose actions are consistent with it.</strong> There is a significant gap between saying valuable things and doing valuable things, and Epictetus is primarily interested in the latter.</p>
+      <p>This means that reading this guide, or any philosophy book, is only the beginning. The material only becomes yours when it shows up in how you respond when you're cut off in traffic, when someone criticizes you unfairly, when you face a loss you did not anticipate. Practice — repeated, imperfect, daily practice — is the only mechanism of genuine progress.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Importance of Clear, Honest Thinking</h3>
+      <p>Muddled thinking produces a muddled life. Epictetus places enormous weight on the cultivation of reason — not as an abstract intellectual virtue, but as the practical tool by which we navigate moral choices, distinguish real goods from false ones, and avoid being manipulated by appearances. <strong>Learning to call things by their right names — without embellishment, catastrophizing, or premature judgment — is a foundational discipline.</strong></p>
+      <p>He also warns against the self-important know-it-all who jumps to conclusions and forces new experiences into old categories. The first step toward wisdom is relinquishing this false certainty. To say "I don't know" honestly, and to look at the world with genuine curiosity, is not weakness — it is the precondition for learning anything new.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Power of Habit</h3>
+      <p>Character is not a fixed property. It is the accumulated result of thousands of small habits — emotional reactions, patterns of thought, reflexive behaviors — repeated over time. <strong>Every time you give in to anger, you deepen the groove of anger. Every time you pause and respond with patience, you deepen the groove of patience.</strong> There is no neutral ground; every action is either building the character you want or eroding it.</p>
+      <p>This means the work of self-improvement is less dramatic than we might imagine. It is not the heroic single choice, but the string of small choices made consistently over months and years. Epictetus advises tracking your progress: notice how your reactions change gradually, how situations that once inflamed you begin to lose their power.</p>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════
+       SECTION 2
+  ════════════════════════════════ -->
+  <section id="pillars">
+    <div class="section-header">
+      <span class="section-number">Section II</span>
+      <h2>Core Pillars to Remember</h2>
+      <p class="section-intro">The essential principles distilled to their most memorable form. These are the load-bearing ideas — the ones to carry into every day.</p>
+    </div>
+
+    <div class="pillars-grid">
+
+      <div class="pillar-item">
+        <span class="pillar-num">1</span>
+        <div class="pillar-content">
+          <strong>The Dichotomy of Control is non-negotiable</strong>
+          <p>Before investing energy in anything, ask: is this within my control? If yes, engage fully. If no, practice acceptance. This is the master key. Every other teaching flows from it.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">2</span>
+        <div class="pillar-content">
+          <strong>Your interpretation is always the variable, never the event</strong>
+          <p>External events are neutral data. Suffering comes from the story you tell about them, not from the events themselves. You can always choose a different, truer interpretation.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">3</span>
+        <div class="pillar-content">
+          <strong>Virtue and happiness are identical, not sequential</strong>
+          <p>You do not become virtuous in order to become happy later. Acting with integrity, honesty, and care is what happiness feels like from the inside. There is no gap to wait across.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">4</span>
+        <div class="pillar-content">
+          <strong>Desire only what is within your power</strong>
+          <p>Desire for outcomes, approval, or wealth you cannot guarantee enrolls you in guaranteed disappointment. Redirect desire toward your own will, reasoning, and conduct — things no one can take from you.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">5</span>
+        <div class="pillar-content">
+          <strong>Stop blaming — the lever is always inside</strong>
+          <p>Blame is an abdication. When something goes wrong, the only productive question is: what in my own response or thinking can I adjust? This is where your actual power lives.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">6</span>
+        <div class="pillar-content">
+          <strong>Perform your duties regardless of how others perform theirs</strong>
+          <p>Your role as a parent, friend, colleague, or citizen does not become optional because the other party is failing theirs. Integrity means fulfilling your obligations unconditionally.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">7</span>
+        <div class="pillar-content">
+          <strong>Character is built by habit, not by intention</strong>
+          <p>You are not what you believe or intend. You are what you repeatedly do. Every small choice — how you react, what you say, whether you follow through — is casting a vote for the person you are becoming.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">8</span>
+        <div class="pillar-content">
+          <strong>Approval-seeking corrupts the inner life</strong>
+          <p>The moment your self-worth depends on what others think of you, you have surrendered control of your own peace of mind. Create merit through your actions. Let the quality of your deeds speak for you.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">9</span>
+        <div class="pillar-content">
+          <strong>Contemplate loss and death regularly</strong>
+          <p>Sit with the impermanence of what you cherish. This is not pessimism — it is the practice that prevents grief from ambushing you, and that keeps gratitude alive in the present moment.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">10</span>
+        <div class="pillar-content">
+          <strong>Philosophy only counts if you live it</strong>
+          <p>Reading and discussing wisdom is preparation, not achievement. The only meaningful measure of philosophical progress is whether your behavior has changed — quietly, consistently, in unremarkable daily moments.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">11</span>
+        <div class="pillar-content">
+          <strong>Think before you speak; guard what enters your mind</strong>
+          <p>Words and the company you keep shape your inner world more than you notice. Be selective with both. You become what you repeatedly give your attention to.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">12</span>
+        <div class="pillar-content">
+          <strong>Happiness is always independent of external conditions</strong>
+          <p>Any happiness tethered to outcomes, possessions, or other people's behavior is structurally fragile. The only happiness worth building is one that holds regardless of what circumstances you find yourself in.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       SECTION 3
+  ════════════════════════════════ -->
+  <section id="application">
+    <div class="section-header">
+      <span class="section-number">Section III</span>
+      <h2>Direct Application &amp; Practices</h2>
+      <p class="section-intro">Theory becomes philosophy only when it changes your behavior. These are the specific transitions — from how you currently respond to how Epictetus would have you respond, with a clear action for each.</p>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">Morning</span>
+      <h3>Begin each day with the Dichotomy of Control</h3>
+      <p>Before looking at your phone, spend two minutes mentally surveying the day ahead. For each obligation or concern that surfaces, ask one question: is this within my control or not? File it accordingly and commit to engaging only with the former.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Write three things you're anxious about today. Next to each, write "mine" or "not mine." For each "not mine," write a single sentence of acceptance. For each "mine," write one concrete action.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Criticized or Insulted</span>
+      <h3>Locate the interpretation, not the offense</h3>
+      <p>Ask whether the criticism is true. If yes, address it. If no, it reflects their impression, not your reality. You are not required to defend yourself.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Adopt Epictetus's reply internally: "They apparently don't know all my other faults, or they would have mentioned those too." Then let the incident go without explanation or defense.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Facing Loss</span>
+      <h3>Reframe possession as stewardship, not ownership</h3>
+      <p>What you had was always on loan. A loss is a return, not a theft. Your care for it while it was here was the real possession.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When you encounter any loss — of a person, a job, a relationship, a possession — consciously replace "I lost X" with "X has been returned." This is not denial; it is a more accurate description of reality.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Angry</span>
+      <h3>Replace judgment with understanding</h3>
+      <p>Wrongdoers act from distorted beliefs, not malice. They cannot see clearly. Pity is the appropriate Stoic response — not because it excuses bad behavior, but because rage harms you and changes nothing.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Ask: "If I had lived exactly their life — their upbringing, heartbreaks, fears — would I have done the same?" Then respond from that more grounded place.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">In Difficult Relationships</span>
+      <h3>Grasp the situation by the right handle</h3>
+      <p>Every situation has two handles: the handle of grievance (hurt, injustice, resentment) and the handle of relationship (bond, shared history, obligation). <strong>Picking up the grievance handle makes the weight unbearable. The relationship handle distributes it.</strong></p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When someone close behaves badly, frame the situation in terms of the bond rather than the offense. "My sibling, who I have known all my life and who is struggling in their own way, did something I found hurtful" leaves room for equanimity. "My sibling treated me unfairly" closes it off.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">Before Any Major Commitment</span>
+      <h3>Survey the full cost before you begin</h3>
+      <p>Half-hearted effort produces neither the result nor the character that full commitment would have built. Do not begin something you are not willing to see through.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Before any significant commitment — a new project, relationship, or goal — write down everything it will require of you, including the things that will be hard and what you will have to sacrifice. If you can accept all of it, proceed completely. If not, do not begin.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">In Conversation</span>
+      <h3>Think before you speak; add only what has purpose</h3>
+      <p>Speaking freely, filling silence, venting passing frustrations — this disrespects others and yourself. Unchecked speech scatters mental energy and gradually erodes the habits of clear thinking.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        For one week, experiment with speaking about 30% less than you normally would. Notice what you would have said, and ask whether it would have added genuine value. Also notice how often conversations improve when you say less and listen more.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">Evening</span>
+      <h3>Measure reactions, not outcomes</h3>
+      <p>Stoic progress is not visible in achievements. It shows up in reduced reactivity, reduced blame, and greater steadiness under pressure.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Each evening, ask three questions: Did I react to something today from an untrained impulse I regret? Did I blame someone or something instead of examining my own response? Did I act in a way consistent with the person I want to become? One honest answer to each. Then move on.
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<div class="divider">· · ·</div>
+
+<footer>
+  <p>A study guide based on <span>The Art of Living</span> by Epictetus, interpreted by Sharon Lebell &nbsp;·&nbsp; HarperOne, 1995 &nbsp;·&nbsp; <a href="index.html">Back to Stoic Book Library</a></p>
+</footer>
+
+</body>
+</html>
