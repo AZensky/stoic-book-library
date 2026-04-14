@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gorgias — Plato Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --stone: #4a4540;
+    --dust: #8a8278;
+    --cream: #f7f3ee;
+    --parchment: #efe9e0;
+    --gold: #b5924a;
+    --gold-light: #d4b07a;
+    --rule: #d9d0c4;
+    --section-bg: #f2ece4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .back-nav {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 48px;
+  }
+  .back-nav a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dust);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .back-nav a:hover { color: var(--gold); }
+  .back-nav a::before { content: '←'; }
+
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 56px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(181,146,74,0.15);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    border: 1px solid rgba(181,146,74,0.1);
+  }
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 28px;
+  }
+  .header-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(247,243,238,0.55);
+    max-width: 480px;
+    line-height: 1.6;
+    border-top: 1px solid rgba(181,146,74,0.2);
+    padding-top: 20px;
+  }
+
+  .toc {
+    background: var(--parchment);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 48px;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .toc-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--dust);
+  }
+  .toc a {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--stone);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toc a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  .section-header {
+    padding: 52px 0 28px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+  .section-number {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .section-intro {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--stone);
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .teaching {
+    margin-bottom: 44px;
+    padding-bottom: 44px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .teaching:last-child { border-bottom: none; }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  p {
+    color: var(--stone);
+    margin-bottom: 12px;
+    font-size: 14.5px;
+  }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 500; }
+
+  .pullout {
+    margin: 20px 0;
+    padding: 18px 24px;
+    border-left: 3px solid var(--gold);
+    background: var(--section-bg);
+    border-radius: 0 4px 4px 0;
+  }
+  .pullout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .pillars-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .pillar-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--parchment);
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+  }
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 32px;
+    padding-top: 2px;
+  }
+  .pillar-content strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .pillar-content p {
+    font-size: 13.5px;
+    color: var(--stone);
+    margin: 0;
+  }
+
+  .scenario {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .scenario:last-child { border-bottom: none; }
+
+  .scenario-trigger {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(181,146,74,0.08);
+    border: 1px solid rgba(181,146,74,0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .scenario h3 { font-size: 20px; margin-bottom: 10px; }
+
+  .action-step {
+    margin-top: 14px;
+    padding: 14px 18px;
+    background: var(--section-bg);
+    border-radius: 6px;
+    font-size: 13.5px;
+    color: var(--stone);
+    border-left: 2px solid var(--gold);
+  }
+  .action-step strong {
+    color: var(--ink);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .divider {
+    text-align: center;
+    margin: 8px 0 0;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 8px;
+    opacity: 0.5;
+  }
+
+  footer {
+    background: var(--ink);
+    color: rgba(247,243,238,0.4);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  footer span { color: var(--gold-light); }
+  footer a {
+    color: var(--gold-light);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  footer a:hover { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .back-nav { padding: 12px 20px; }
+    header { padding: 40px 24px 36px; }
+    .toc { padding: 16px 24px; gap: 20px; }
+    main { padding: 0 20px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html">Stoic Book Library</a>
+</div>
+
+<header>
+  <p class="eyebrow">Study Guide &amp; Synthesis · Philosophy / Ethics</p>
+  <h1>Gorgias</h1>
+  <p class="subtitle">Plato — Translated by Walter Hamilton &amp; Chris Emlyn-Jones</p>
+  <p class="header-desc">A complete reference for internalizing Plato's foundational dialogue on power, justice, and how to live. Covers the key philosophical arguments, the core principles to carry daily, and how to apply them in practice.</p>
+</header>
+
+<nav class="toc">
+  <span class="toc-label">Contents</span>
+  <a href="#teachings">I. Key Teachings</a>
+  <a href="#pillars">II. Core Pillars</a>
+  <a href="#application">III. Daily Application</a>
+</nav>
+
+<main>
+
+  <!-- ═══════════════════════════════
+       SECTION 1
+  ════════════════════════════════ -->
+  <section id="teachings">
+    <div class="section-header">
+      <span class="section-number">Section I</span>
+      <h2>Comprehensive Key Teachings</h2>
+      <p class="section-intro">Every major concept from the dialogue, with the underlying logic intact — not just what Plato argued, but why each idea holds together and what it demands of us.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Central Question: How Should One Live?</h3>
+      <p>Gorgias is structured around a single, urgent question: should a person pursue power, pleasure, and worldly success, or should they pursue justice and virtue? These are not abstract philosophical positions — they represent two fundamentally incompatible ways of organizing a life. <strong>Plato argues, through Socrates, that most people chase the first path while telling themselves they value the second.</strong> The dialogue forces each of its characters to examine whether they are actually living by their stated values, and each fails the test.</p>
+      <p>The dialogue's genius is that it does not merely argue for virtue in theory. It demonstrates that the pursuit of power and pleasure, when examined honestly, leads to internal incoherence, dependence on others, and an inability to answer the most basic question about one's own life. Virtue, by contrast, produces the only form of happiness that is stable.</p>
+      <div class="pullout"><p>The real purpose of a human life in society is to live rightly and to achieve ultimate happiness — and Socrates insists these are the same thing.</p></div>
+    </div>
+
+    <div class="teaching">
+      <h3>Oratory Without Knowledge Is Flattery, Not an Art</h3>
+      <p>The dialogue opens with Socrates questioning Gorgias, the celebrated orator, about the true nature of his skill. Gorgias claims that oratory — the ability to persuade large audiences — is the greatest of all arts because it gives its possessor freedom and power over others. Socrates methodically dismantles this claim. <strong>Genuine arts, like medicine or engineering, are grounded in knowledge of what is truly good for the person they serve. Oratory, as Gorgias practices it, produces only belief and conviction — it does not teach knowledge or aim at the good.</strong></p>
+      <p>Socrates distinguishes between persuasion that produces knowledge (which is rare and difficult) and persuasion that produces mere conviction without understanding (which is what orators do). The orator wins over a crowd not by helping them understand what is true and good, but by telling them what they want to hear. This makes oratory, in Socrates' framework, a form of flattery — what he calls "pandering." It is to the soul what cookery is to the body: it gives pleasure in the moment while ignoring what is actually healthy.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Power Without Wisdom Is No Power at All</h3>
+      <p>Polus, Gorgias's younger associate, challenges Socrates with what seems like an obvious counterargument: surely tyrants and powerful orators have real power — they can imprison, exile, and kill anyone they wish. Socrates responds with one of the most important distinctions in the dialogue. <strong>Doing what seems best to you is not the same as doing what you actually want, because what we truly want is always the good.</strong> When someone who lacks wisdom acts according to their desires, they are pursuing what they think is good but are actually mistaken about what is beneficial for them.</p>
+      <p>The tyrant who kills and confiscates and rules seems powerful, but if his actions lead to corruption of his own soul — which Socrates argues they inevitably do — then he has not achieved what he truly wanted. He has done what seemed good to him while actually harming himself most of all. Real power consists in knowing what is genuinely good and acting toward it. The tyrant has capacity for action but lacks the knowledge to make that action genuinely beneficial — and so, in the deepest sense, he is powerless.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>It Is Worse to Do Wrong Than to Suffer Wrong</h3>
+      <p>This is Socrates' most deliberately shocking claim in the dialogue, and the one that provokes the most resistance. The conventional Greek view was the opposite: it is obviously worse to be the victim of injustice than its perpetrator. Socrates argues systematically that doing wrong is worse for the person who does it. <strong>Wrongdoing is a disease of the soul — the worst kind of disease — because the soul is more precious than the body or any material possession.</strong></p>
+      <p>He pushes the argument further: just as a sick person who refuses treatment is in a worse condition than one who accepts it, the wrongdoer who escapes punishment is in a worse state than the one who is punished and thereby cured. To commit injustice and go unpunished is not the victory it appears to be. It is the deepest form of ruin — the corruption of the soul's capacity for virtue — and it is permanent unless addressed. The person who suffers wrong, by contrast, may lose material things but their soul remains undamaged.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Punishment Is a Form of Medicine for the Soul</h3>
+      <p>Following from the teaching above, Socrates argues that punishment, when justly applied, is not a harm but a benefit to the person being punished. <strong>Just as medicine cures the body of disease, just punishment cures the soul of the moral corruption caused by wrongdoing.</strong> The person who is punished and thereby forced to confront the consequences of their actions is in a better position than the person who avoids accountability entirely.</p>
+      <p>This leads to one of the dialogue's most counterintuitive conclusions: a wrongdoer, if they have any wisdom, should actually seek punishment rather than flee from it. Going to a judge to be held accountable is analogous to going to a doctor when you are sick. The only people who avoid doctors are those who either do not know they are sick or who are too frightened to face the cure. Socrates extends this to argue that the best use of oratory — if it has any legitimate use — is to accuse oneself and one's associates of wrongdoing, not to defend against just punishment.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Soul Requires Order and Proportion</h3>
+      <p>Callicles, the dialogue's most formidable interlocutor, argues that the naturally superior person should indulge all their desires without restraint — that this is what nature itself endorses, and that conventional morality is merely a tool invented by the weak to hold back the strong. Socrates responds by showing that unlimited desire is self-defeating. <strong>A soul in a state of disorder — one ruled by ungoverned appetites — cannot be genuinely happy, because happiness requires internal order, not mere gratification.</strong></p>
+      <p>Socrates uses the image of leaky barrels: the intemperate person must constantly chase new pleasures as old ones drain away, never reaching a state of real satisfaction. The temperate person, by contrast, has filled and sealed their vessels — they are content. This is not a call for asceticism but for the rule of reason over appetite. The virtues of temperance, justice, courage, and piety are not external constraints on the good life; they are its constitutive elements. Without them, life is noise and motion without direction.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Nature and Convention Are Not Opposed — Justice Is Natural</h3>
+      <p>Callicles' most sophisticated argument is that conventional morality — the idea that doing wrong is shameful — is merely human convention designed to constrain the strong. By nature, he argues, the strong should rule the weak and take more than their share. Socrates dismantles this by showing that the very reasoning Callicles uses to justify natural superiority ends up supporting the conventional view. <strong>If strength and numbers give the right to rule, then the democratic majority is stronger than any individual — and the laws they establish are therefore natural, not merely conventional.</strong></p>
+      <p>More deeply, Socrates argues that the cosmic order itself is one of proportion and equality. The universe is held together by bonds of community, friendship, and order — and a life that violates these principles is not aligned with nature but against it. The person who pursues unlimited power and pleasure is not living the truly natural life; they are living in a state of disorder that puts them at war with the structure of reality itself.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The True Politician Aims at the Good of Citizens, Not Their Approval</h3>
+      <p>In the dialogue's most politically charged section, Socrates argues that none of Athens' celebrated statesmen — Pericles, Themistocles, Cimon, Miltiades — were genuinely good politicians, despite their fame. His criterion is demanding: a good politician improves the souls of the citizens in their charge. <strong>A statesman who gives people what they want, rather than what is good for them, is not governing — they are pandering.</strong> The fact that Athens eventually turned on all four of these celebrated leaders demonstrates, for Socrates, that they failed to actually improve the people they governed.</p>
+      <p>This is a challenging teaching because it requires distinguishing between popularity and genuine service. The doctor who prescribes a difficult treatment is less immediately appealing than the cook who offers dessert — but the doctor is actually helping. The genuine politician, like the doctor, must be willing to be unpopular in service of what is truly beneficial. Socrates presents himself as perhaps the only Athenian practicing the true art of politics — not by winning elections or building walls, but by examining and challenging the values of his fellow citizens.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Pleasure and Good Are Not Identical</h3>
+      <p>One of the dialogue's central philosophical arguments is directed against Callicles' implicit assumption that pleasure is the good. Socrates demonstrates this is false through a careful argument: pleasure and pain can be experienced simultaneously (as when a thirsty person drinks — they feel both thirst as pain and satisfaction as pleasure at the same time). But good and evil cannot be present simultaneously in the same way. <strong>Since pleasure and pain can coexist while good and evil cannot, pleasure cannot simply be identified with good.</strong></p>
+      <p>This matters enormously for how we live. If pleasure were the good, then there would be no basis for preferring courage over cowardice, wisdom over foolishness — since cowards and fools experience pleasure just as much as the brave and wise. The good must be something more structured and demanding than pleasure: it involves the presence of order, virtue, and knowledge in the soul. Some pleasures are genuinely good because they serve that order; others are harmful even when they feel pleasant.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>The Myth of Judgment: The Soul Reveals Its True State After Death</h3>
+      <p>Socrates concludes the dialogue with a mythological account of what happens after death. In this story, souls are judged after death by divine judges who can see the soul directly, stripped of the body, wealth, reputation, and social position that concealed its true character in life. <strong>The soul of a person who lived wickedly — especially one who wielded power — is marked and scarred by their wrongdoing, visible to all.</strong> Those who cannot be cured are punished as examples to others; those who can be reformed are treated accordingly.</p>
+      <p>Socrates does not present this myth as mere allegory. He presents it as the truth — and its function in the dialogue is to extend the argument about virtue into the domain of ultimate consequences. The tyrant who seemed to prosper in life will not escape accounting; the philosopher who seemed powerless and vulnerable will be vindicated. What we build in our soul during life is what we carry with us beyond it. The only protection that actually matters is having lived with integrity.</p>
+    </div>
+
+    <div class="teaching">
+      <h3>Internal Harmony Is the Foundation of All Virtue</h3>
+      <p>Toward the dialogue's end, Socrates articulates what virtue actually looks like from the inside. The self-disciplined person — the one whose reason governs their appetites — will naturally embody justice, reverence, and courage as well, because all virtue flows from the same source: a soul in a state of order. <strong>You cannot be genuinely brave without self-discipline; you cannot be truly just without it either. The virtues are unified — they are different expressions of the same fundamental ordering of the soul.</strong></p>
+      <p>This unity of virtue means that moral progress is not a matter of adding virtues one by one, but of cultivating the underlying condition from which all virtues grow: the soul's relationship with reason and truth. A person who achieves this internal harmony is, in Socrates' view, happy in the deepest sense — not dependent on external circumstances, not vulnerable to the opinions of others, and not in conflict with themselves. This is the only form of happiness that is actually secure.</p>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════
+       SECTION 2
+  ════════════════════════════════ -->
+  <section id="pillars">
+    <div class="section-header">
+      <span class="section-number">Section II</span>
+      <h2>Core Pillars to Remember</h2>
+      <p class="section-intro">The essential principles distilled to their most memorable form. These are the load-bearing ideas — the ones to carry into every day.</p>
+    </div>
+
+    <div class="pillars-grid">
+
+      <div class="pillar-item">
+        <span class="pillar-num">1</span>
+        <div class="pillar-content">
+          <strong>Doing wrong harms the wrongdoer most of all</strong>
+          <p>The person who commits injustice damages their own soul — the most valuable thing they have. The victim may lose property or comfort, but the perpetrator loses something far more important.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">2</span>
+        <div class="pillar-content">
+          <strong>Power without wisdom is no power at all</strong>
+          <p>The capacity to do whatever you want is meaningless if you lack the knowledge to know what is genuinely good for you. Tyrants are among the least powerful people — they act on mistaken desires and harm themselves most.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">3</span>
+        <div class="pillar-content">
+          <strong>Flattery is not help — and most of what passes for service is flattery</strong>
+          <p>Telling people what they want to hear, giving them what pleases them rather than what serves them — this is pandering, not genuine care. The doctor who prescribes the hard treatment is doing more good than the cook who offers sweets.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">4</span>
+        <div class="pillar-content">
+          <strong>Pleasure and good are not the same thing</strong>
+          <p>Something can feel good and harm you. Something can feel painful and benefit you greatly. Never mistake pleasant sensations for genuine wellbeing — they are categorically different things.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">5</span>
+        <div class="pillar-content">
+          <strong>Accountability is medicine, not punishment</strong>
+          <p>Being held responsible for wrongdoing — facing consequences, making amends — cures the soul of the damage wrongdoing causes. Escaping accountability is not a victory. It is leaving the wound untreated.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">6</span>
+        <div class="pillar-content">
+          <strong>The soul requires order, not gratification</strong>
+          <p>Ungoverned appetites do not lead to happiness — they lead to a permanent, unfillable craving. Real contentment comes from the rule of reason over desire, not from satisfying every impulse that arises.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">7</span>
+        <div class="pillar-content">
+          <strong>Genuine service sometimes requires being unpopular</strong>
+          <p>The true politician, teacher, or friend aims at what is good for those they serve — not what those people want to hear. Popularity and genuine helpfulness are frequently at odds.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">8</span>
+        <div class="pillar-content">
+          <strong>Virtue is unified — all virtues come from the same source</strong>
+          <p>Self-discipline, justice, courage, and reverence are not separate qualities to be acquired one by one. They are all expressions of a soul in right order. Cultivate the order, and the virtues follow.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">9</span>
+        <div class="pillar-content">
+          <strong>What you build in your soul is what you carry with you</strong>
+          <p>Reputation, wealth, and social position are external and temporary. The character of your soul — shaped by every choice you make — is permanent. This is what ultimately matters.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">10</span>
+        <div class="pillar-content">
+          <strong>Internal harmony is the only secure form of happiness</strong>
+          <p>Happiness that depends on external circumstances — approval, power, pleasure — is always fragile. The only happiness that cannot be taken from you is the harmony of a soul living in accordance with what it knows to be good.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">11</span>
+        <div class="pillar-content">
+          <strong>Examine whether your persuasion serves truth or merely pleases</strong>
+          <p>Every time you speak to influence others — in argument, in advice, in leadership — ask whether you are aiming at what is genuinely good for them or simply at winning their agreement.</p>
+        </div>
+      </div>
+
+      <div class="pillar-item">
+        <span class="pillar-num">12</span>
+        <div class="pillar-content">
+          <strong>The strength of a life is revealed under examination, not in performance</strong>
+          <p>Gorgias, Polus, and Callicles all collapse under sustained questioning because their views rest on unexamined assumptions. A life worth living can withstand the hardest scrutiny — and invites it.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       SECTION 3
+  ════════════════════════════════ -->
+  <section id="application">
+    <div class="section-header">
+      <span class="section-number">Section III</span>
+      <h2>Direct Application &amp; Practices</h2>
+      <p class="section-intro">Theory becomes philosophy only when it changes your behavior. These are the specific transitions — from how you currently respond to how Plato's Socrates would have you respond, with a clear action for each.</p>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Tempted by a Shortcut or Injustice</span>
+      <h3>Ask who is actually harmed by this choice</h3>
+      <p>The Gorgias argument forces a reorientation: the primary victim of wrongdoing is the person who commits it. Before any action that compromises your integrity, the honest question is not "can I get away with this?" but "what does this do to my soul?"</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When you are about to do something you know is wrong — cut a corner, deceive someone, treat a person unjustly — pause and ask: "Who is harmed most by this?" Plato's answer is you. Let that be the deterrent, not the fear of getting caught.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When You Have Done Something Wrong</span>
+      <h3>Seek accountability rather than concealment</h3>
+      <p>The dialogue's most counterintuitive teaching: punishment cures. Hiding wrongdoing or avoiding its consequences leaves the soul's wound untreated and worsening. Facing accountability — however uncomfortable — is the beginning of repair.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When you have acted wrongly, resist the impulse to minimize, justify, or conceal it. Instead, go toward the discomfort: acknowledge it clearly, make it right where possible, and accept the consequences. This is not weakness — it is the medicine.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Giving Advice or Feedback</span>
+      <h3>Distinguish between what serves and what pleases</h3>
+      <p>One of Gorgias's central warnings is that telling people what they want to hear feels like kindness but is actually a form of abandonment. Genuine care sometimes requires delivering unwelcome truths.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Before giving advice, ask honestly: "Am I saying what will genuinely help this person, or what will make them feel good about me?" If you are softening something important to avoid discomfort — yours or theirs — that is pandering. Say the harder thing with care.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Pursuing Power, Status, or Influence</span>
+      <h3>Test whether the desire serves genuine good or mere appearance</h3>
+      <p>Callicles represents the seductive logic of ambition: power lets you do what you want. Socrates' counter is that doing what you want without wisdom does not make you powerful — it makes you a slave to whichever desire currently dominates you.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When you find yourself wanting power, status, or recognition, ask: "What would I actually do with this? Does having it make me better, or just more capable of satisfying my current desires?" If the honest answer is the latter, the desire is worth examining — not necessarily abandoning, but not trusting blindly.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Managing Appetites and Desires</span>
+      <h3>Prefer the filled vessel to the leaking one</h3>
+      <p>Socrates' image of the leaking barrel captures the logic of indulgence perfectly: constant gratification requires constant refilling, never producing actual satisfaction. Contentment comes from what you have brought to order, not from what you continue to chase.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When you notice yourself in the grip of a recurring craving — for more food, more validation, more distraction — ask: "Is satisfying this again going to produce genuine satisfaction, or just reset the clock?" Identify one area of appetite where restraint, practiced consistently, would produce more lasting peace than indulgence.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Facing Criticism or Injustice</span>
+      <h3>Locate what the experience actually costs you</h3>
+      <p>Socrates' argument that suffering wrong is less harmful than doing wrong is not a call to be passive. It is a recalibration: the person who wrongs you harms their soul; what they take from you — reputation, comfort, even safety — is less precious than your soul's integrity, which remains untouched if you do not respond with injustice in return.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        When someone wrongs you, before reacting, ask: "What has actually been damaged here?" If your material circumstances or reputation have suffered but you have not compromised your own integrity, you are, by Plato's account, in the better position. Respond from that understanding, not from the impulse to retaliate at all costs.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">When Examining Beliefs Under Pressure</span>
+      <h3>Be willing to be refuted — it is a greater good than winning</h3>
+      <p>Gorgias, Polus, and Callicles each refuse, at crucial moments, to follow the argument where it leads — because they are more attached to their position than to the truth. Socrates explicitly says he would rather be shown he is wrong than convince others of a false view. This is the attitude that makes genuine intellectual progress possible.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        In your next significant disagreement, try to hold the question: "Would I rather be right, or would I rather know what is actually true?" If someone produces a good argument against your position, treat it as a gift — not a threat. Being corrected is being helped.
+      </div>
+    </div>
+
+    <div class="scenario">
+      <span class="scenario-trigger">Daily Reflection</span>
+      <h3>Audit the soul, not the scorecard</h3>
+      <p>The myth at the dialogue's end makes one thing vivid: in the final accounting, it is not what you achieved but what your soul looks like that matters. The markers of a good day are not accomplishments or approval — they are the quality of your choices.</p>
+      <div class="action-step">
+        <strong>Practice</strong>
+        Each evening, ask three questions drawn from Gorgias: Did I act justly today, even when it cost me something? Did I pursue what is genuinely good, or what merely felt pleasant or safe? Is my soul, right now, more ordered than it was this morning, or less? One honest answer to each is enough.
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<div class="divider">· · ·</div>
+
+<footer>
+  <p>A study guide based on <span>Gorgias</span> by Plato, translated by Walter Hamilton &amp; Chris Emlyn-Jones &nbsp;·&nbsp; Penguin Classics, 2004 &nbsp;·&nbsp; <a href="index.html">Back to Stoic Book Library</a></p>
+</footer>
+
+</body>
+</html>
